@@ -1,19 +1,25 @@
+using System.Collections.Generic;
+using MySql.Data.MySqlClient;
 using System;
 
 namespace HairSalon.Models
 {
-  public class HairSalonModel
+  public class Item
   {
     private string _description;
     private int _id;
     private int _categoryId;
 
-    public Item (string description, int Id = 0, int categoryId = 0)
+
+    public Item (string description, int id = 0, int categoryId = 0)
     {
       _description = description;
       _categoryId = categoryId;
       _id = id;
+
+
     }
+
     public string GetDescription()
     {
       return _description;
@@ -45,7 +51,7 @@ namespace HairSalon.Models
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
-        int ItemId = rdr.GetInt32(0);
+        int itemId = rdr.GetInt32(0);
         string itemDescription = rdr.GetString(1);
         int categoryId = rdr.GetInt32(3);
         Item newItem = new Item(itemDescription, itemId, categoryId);
@@ -79,6 +85,9 @@ namespace HairSalon.Models
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO 'items'('description', 'category_id');";
 
       MySqlParameter description = new MySqlParameter();
       description.ParameterName = "@ItemDescription";
@@ -143,7 +152,8 @@ namespace HairSalon.Models
         itemCategoryId = rdr.GetInt32(3);
       }
 
-      Item foundItem = new Item(itemDescription, itemId, itemCategoryId);
+  Item foundItem = new Item(itemDescription, itemId, itemCategoryId);
+
 
       conn.Close();
       if (conn != null)

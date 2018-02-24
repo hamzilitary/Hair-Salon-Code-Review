@@ -44,8 +44,8 @@ namespace HairSalon.Controllers
         Dictionary<string, object> model = new Dictionary<string, object>();
         Category foundCategory = Category.Find(id);
         List<Item> categoryItems = foundCategory.GetItems();
-        Item newItem = new Item(Request.Form["new-item"], Request.Form["raw-date"]);
-        newItem.SetCatId(foundCategory.GetId());
+        Item newItem = new Item(Request.Form["new-item"]);
+        newItem.SetCategoryId(foundCategory.GetId());
         categoryItems.Add(newItem);
         newItem.Save();
         model.Add("items", categoryItems);

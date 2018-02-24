@@ -3,7 +3,7 @@ using HairSalon.Models;
 
 namespace HairSalon.Controllers
 {
-  public class HomeController : Controller
+  public class ItemsController : Controller
   {
 
     [HttpGet("/categories/{categoryID}/items/new")]
@@ -29,7 +29,7 @@ namespace HairSalon.Controllers
     }
 
     [HttpPost("/items/{id}/update")]
-    public ActionResult UpdateForm(int id)
+    public ActionResult UpdateItem(int id)
     {
       Item thisItem = Item.Find(id);
       thisItem.Edit(Request.Form["newname"]);

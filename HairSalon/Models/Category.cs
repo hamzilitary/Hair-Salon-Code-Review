@@ -9,7 +9,7 @@ namespace HairSalon.Models
     private string _name;
     private int _id;
 
-    public Category(string name, int Id = 0)
+    public Category(string name, int id = 0)
     {
       _name = name;
       _id = id;
@@ -22,7 +22,7 @@ namespace HairSalon.Models
     {
       return _name;
     }
-  }
+
   public static List<Category> GetAll()
    {
      List<Category> allCategories = new List<Category> {};
@@ -109,7 +109,7 @@ namespace HairSalon.Models
        string itemDescription = rdr.GetString(1);
        int itemCategoryId = rdr.GetInt32(3);
        Item newItem = new Item(itemDescription, itemId, itemCategoryId);
-       newItem.SetDate();
+
        allCategoryItems.Add(newItem);
      }
      conn.Close();
@@ -210,11 +210,11 @@ namespace HairSalon.Models
      {
        int itemId = rdr.GetInt32(0);
        string itemDescription = rdr.GetString(1);
-       string itemRawDate = rdr.GetString(2);
-       int categoryId = rdr.GetInt32(4);
 
-       Item newItem = new Item(itemDescription, itemRawDate, itemId, categoryId);
-       newItem.SetDate();
+       int categoryId = rdr.GetInt32(3);
+
+       Item newItem = new Item(itemDescription, itemId, categoryId);
+
        sortedList.Add(newItem);
      }
      conn.Close();
@@ -225,6 +225,4 @@ namespace HairSalon.Models
      return sortedList;
    }
  }
-}
-
-}
+ }
