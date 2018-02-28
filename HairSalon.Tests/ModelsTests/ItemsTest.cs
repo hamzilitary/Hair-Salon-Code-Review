@@ -14,12 +14,12 @@ namespace HairSalon.Models.Tests
      Category.DeleteAll();
    }
 
-    // public ItemTests()
-    // {
-    //
-    //   DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=my_database_name_test;";
-    // }
-    //
+    public ItemTests()
+    {
+
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=hair_salon_test;";
+    }
+
 
 
     [TestMethod]

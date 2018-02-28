@@ -1,0 +1,8 @@
+@{
+  Layout = "_Layout";
+}
+@foreach (var category in Model)
+{
+  <h4>@category.GetName() | <a href="/categories/@category.GetId()">View</a> | <a href="/categories/@category.GetId()/delete">Delete</a></h4>
+}
+<a href="/categories/new" class="btn btn-danger btn-lg active">ADD NEW LIFE PATH</a>

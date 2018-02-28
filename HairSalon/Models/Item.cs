@@ -149,7 +149,7 @@ namespace HairSalon.Models
       {
         itemId = rdr.GetInt32(0);
         itemDescription = rdr.GetString(1);
-        itemCategoryId = rdr.GetInt32(3);
+        itemCategoryId = rdr.GetInt32(2);
       }
 
   Item foundItem = new Item(itemDescription, itemId, itemCategoryId);

@@ -33,8 +33,8 @@ namespace HairSalon.Models
      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
      while (rdr.Read())
      {
-       int categoryId = rdr.GetInt32(1);
-       string categoryName = rdr.GetString(0);
+       int categoryId = rdr.GetInt32(0);
+       string categoryName = rdr.GetString(1);
        Category newCategory = new Category(categoryName, categoryId);
        allCategories.Add(newCategory);
      }
@@ -66,18 +66,15 @@ namespace HairSalon.Models
      conn.Open();
 
      var cmd = conn.CreateCommand() as MySqlCommand;
-     cmd.CommandText = @"INSERT INTO `categories` (`name`, `id`) VALUES (@CategoryName, @CategoryId);";
+     cmd.CommandText = @"INSERT INTO `categories` (`name`) VALUES (@CategoryName);";
 
      MySqlParameter name = new MySqlParameter();
      name.ParameterName = "@CategoryName";
      name.Value = this._name;
 
-     MySqlParameter id = new MySqlParameter();
-     id.ParameterName = "@CategoryId";
-     id.Value = this._id;
 
      cmd.Parameters.Add(name);
-     cmd.Parameters.Add(id);
+     ;
 
      cmd.ExecuteNonQuery();
      _id = (int) cmd.LastInsertedId;

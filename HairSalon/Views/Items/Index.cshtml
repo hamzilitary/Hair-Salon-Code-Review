@@ -1,0 +1,9 @@
+@{
+  Layout = "_Layout";
+}
+
+@foreach (var item in Model)
+{
+  <h4>@item.GetDescription() | <a href="/items/@item.GetId()/update">Edit</a> | <a href="/items/@item.GetId()/delete">Delete</a></h4>
+}
+<a href="/items/new">Add New Item</a>
