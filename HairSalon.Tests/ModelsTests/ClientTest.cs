@@ -6,15 +6,15 @@ using System;
 namespace HairSalon.Models.Tests
 {
   [TestClass]
-  public class ItemTest : IDisposable
+  public class ClientTest : IDisposable
  {
    public void Dispose()
    {
-     Item.DeleteAll();
-     Category.DeleteAll();
+     Client.DeleteAll();
+     Stylist.DeleteAll();
    }
 
-    public ItemTests()
+    public ClientTests()
     {
 
       DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=hair_salon_test;";
@@ -27,10 +27,10 @@ namespace HairSalon.Models.Tests
     {
       //Arrange
       string controlDesc = "Go to the Moon";
-      Item newItem = new Item("Go to the Moon", 2);
+      Client newClient = new Client("Go to the Moon", 2);
 
       //Act
-      string result = newItem.GetDescription();
+      string result = newClient.GetDescription();
 
       //Assert
       Assert.AreEqual(result, controlDesc);
