@@ -3,37 +3,62 @@ using System.Collections.Generic;
 using HairSalon.Models;
 using System;
 
-namespace HairSalon.Models.Tests
+namespace HairSalon.Tests
 {
   [TestClass]
-  public class ClientTest : IDisposable
- {
-   public void Dispose()
-   {
-     Client.DeleteAll();
-     Stylist.DeleteAll();
-   }
+  public class ClientTests : IDisposable
+  {
+    public void Dispose()
+    {
+      Client.DeleteAll();
+      Stylist.DeleteAll();
+    }
 
     public ClientTests()
     {
-
-      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=hair_salon_test;";
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=hair_salon_test";
     }
-
-
-
     [TestMethod]
-    public void GetDescription_FetchTheDescription_String()
+    public void Equals_ReturnsTrueIfDescriptionsAreTheSame_Recipe()
+  {
+    // Arrange
+    Client firstClient = new Client("Bob");
+    Client secondClient = new Client("Bob");
+
+    //Act
+    firstClient.Save();
+    secondClient.Save();
+
+    // Assert
+    Assert.AreEqual(true, firstClient.GetDescription().Equals(secondClient.GetDescription()));
+  }
+
+  [TestMethod]
+  public void Find_FindsClientInDatabase_Client()
+  {
+    //Arrange
+    Client testClient = new Client("Bob");
+    testClient.Save();
+
+    //Act
+    Client foundClient = Client.Find(testClient.GetId());
+
+    //Assert
+    Assert.AreEqual(testClient, foundClient);
+  }
+    [TestMethod]
+    public void Delete_DeleteAllClientsInDatabase_void()
     {
-      //Arrange
-      string controlDesc = "Go to the Moon";
-      Client newClient = new Client("Go to the Moon", 2);
+      //arrange
+       Client newClient = new Client("Bob");
 
-      //Act
-      string result = newClient.GetDescription();
+       //act
+       Client.DeleteAll();
+       int result = Client.GetAll().Count;
 
-      //Assert
-      Assert.AreEqual(result, controlDesc);
+       //assert
+       Assert.AreEqual(0, result);
     }
+
   }
 }

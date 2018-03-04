@@ -47,13 +47,13 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM clients;";
+      cmd.CommandText = @"SELECT * FROM client;";
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
         int clientId = rdr.GetInt32(0);
         string clientDescription = rdr.GetString(1);
-        int stylistId = rdr.GetInt32(3);
+        int stylistId = rdr.GetInt32(2);
         Client newClient = new Client(clientDescription, clientId, stylistId);
         allClients.Add(newClient);
       }
@@ -71,7 +71,7 @@ namespace HairSalon.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM clients;";
+      cmd.CommandText = @"DELETE FROM client;";
 
       cmd.ExecuteNonQuery();
 
@@ -87,7 +87,7 @@ namespace HairSalon.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO 'clients'('description', 'stylist_id');";
+      cmd.CommandText = @"INSERT INTO 'client'('description', 'stylist');";
 
       MySqlParameter description = new MySqlParameter();
       description.ParameterName = "@ClientDescription";
@@ -133,7 +133,7 @@ namespace HairSalon.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM 'itmes' WHERE id = @thisId;";
+      cmd.CommandText = @"SELECT * FROM 'client' WHERE id = @thisId;";
 
       MySqlParameter thisId = new MySqlParameter();
       thisId.ParameterName = "@thisId";
@@ -168,7 +168,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"UPDATE clients SET description = @newDescription WHERE id = @searchId;";
+      cmd.CommandText = @"UPDATE client SET description = @newDescription WHERE id = @searchId;";
 
       MySqlParameter searchId = new MySqlParameter();
       searchId.ParameterName = "@searchId";
@@ -195,7 +195,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM clients WHERE id = @thisId;";
+      cmd.CommandText = @"DELETE FROM client WHERE id = @thisId;";
 
       MySqlParameter thisId = new MySqlParameter();
       thisId.ParameterName = "@thisId";
