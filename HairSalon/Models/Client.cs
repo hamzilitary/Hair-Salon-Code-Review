@@ -11,13 +11,11 @@ namespace HairSalon.Models
     private int _stylistId;
 
 
-    public Client (string description, int id = 0, int stylistId = 0)
+    public Client (string description, int stylistId = 0, int clientId = 0)
     {
       _description = description;
       _stylistId = stylistId;
-      _id = id;
-
-
+      _id = clientId;
     }
 
     public string GetDescription()
@@ -54,7 +52,7 @@ namespace HairSalon.Models
         int clientId = rdr.GetInt32(0);
         string clientDescription = rdr.GetString(1);
         int stylistId = rdr.GetInt32(2);
-        Client newClient = new Client(clientDescription, clientId, stylistId);
+        Client newClient = new Client(clientDescription, stylistId, clientId);
         allClients.Add(newClient);
       }
       conn.Close();
@@ -87,7 +85,7 @@ namespace HairSalon.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO 'client'('description', 'stylist');";
+      cmd.CommandText = @"INSERT INTO `client`(`name`, `stylist`) VALUES (@ClientDescription, @StylistId);";
 
       MySqlParameter description = new MySqlParameter();
       description.ParameterName = "@ClientDescription";
@@ -112,6 +110,10 @@ namespace HairSalon.Models
 
     }
 
+    public override int GetHashCode() {
+      return _id.GetHashCode() ^ _stylistId.GetHashCode() ^ _description.GetHashCode();
+    }
+
     public override bool Equals(System.Object otherClient)
     {
       if (!(otherClient is Client))
@@ -133,7 +135,7 @@ namespace HairSalon.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM 'client' WHERE id = @thisId;";
+      cmd.CommandText = @"SELECT * FROM `client` WHERE id = @thisId;";
 
       MySqlParameter thisId = new MySqlParameter();
       thisId.ParameterName = "@thisId";
@@ -152,7 +154,7 @@ namespace HairSalon.Models
         clientStylistId = rdr.GetInt32(2);
       }
 
-  Client foundClient = new Client(clientDescription, clientId, clientStylistId);
+  Client foundClient = new Client(clientDescription, clientStylistId, clientId);
 
 
       conn.Close();
@@ -168,7 +170,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"UPDATE client SET description = @newDescription WHERE id = @searchId;";
+      cmd.CommandText = @"UPDATE client SET name = @newDescription WHERE id = @searchId;";
 
       MySqlParameter searchId = new MySqlParameter();
       searchId.ParameterName = "@searchId";

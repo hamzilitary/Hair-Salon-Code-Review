@@ -105,7 +105,7 @@ namespace HairSalon.Models
        int clientId = rdr.GetInt32(0);
        string clientDescription = rdr.GetString(1);
        int clientStylistId = rdr.GetInt32(2);
-       Client newClient = new Client(clientDescription, clientId, clientStylistId);
+       Client newClient = new Client(clientDescription, clientStylistId, clientId);
 
        allStylistClients.Add(newClient);
      }
@@ -210,7 +210,7 @@ namespace HairSalon.Models
 
        int stylistId = rdr.GetInt32(2);
 
-       Client newClient = new Client(clientDescription, clientId, stylistId);
+       Client newClient = new Client(clientDescription, stylistId, clientId);
 
        sortedList.Add(newClient);
      }
@@ -220,6 +220,9 @@ namespace HairSalon.Models
        conn.Dispose();
      }
      return sortedList;
+   }
+   public override int GetHashCode() {
+     return _id.GetHashCode() ^ _name.GetHashCode();
    }
  }
  }

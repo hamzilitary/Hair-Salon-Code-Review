@@ -21,16 +21,23 @@ namespace HairSalon.Tests
     [TestMethod]
     public void Equals_ReturnsTrueIfDescriptionsAreTheSame_Recipe()
   {
+    Stylist stylist = new Stylist("Harry");
+    stylist.Save();
     // Arrange
-    Client firstClient = new Client("Bob");
-    Client secondClient = new Client("Bob");
+    Client firstClient = new Client("Bob", stylist.GetId());
+    Client secondClient = new Client("Bob Jr.", stylist.GetId());
 
     //Act
     firstClient.Save();
     secondClient.Save();
 
+    var clients = stylist.GetClients();
+    Assert.AreEqual(2, clients.Count);
     // Assert
-    Assert.AreEqual(true, firstClient.GetDescription().Equals(secondClient.GetDescription()));
+    Assert.AreNotEqual(firstClient.GetDescription(), secondClient.GetDescription());
+    Assert.AreNotEqual(firstClient.GetId(), secondClient.GetId());
+    Assert.AreEqual(firstClient.GetStylistId(), secondClient.GetStylistId());
+
   }
 
   [TestMethod]
