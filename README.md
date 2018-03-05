@@ -6,32 +6,81 @@
 
 ## Description
 
-_{This is an app that can schedule a client for a specific hair stylist and that show a detail and description of the stylist. }_
+_{Code Review for week 3 in C# for Epicodus. The purpose is to demonstrate using databases with MySQL. }_
+
+## Specifications
+
+* _The User inputs to create a Stylist
+* _Input: "Bob Bobbert"
+* _Output: "Bob Bobbert"
+
+* _User creates client
+* _Input: "Mambo Jambo"
+* _Output: "Mambo Jambo"
+
+* _User can set client to stylist
+* _Input: "Mambo Jambo" to "Bob Bobbert"
+* _Output: "Bob Bobbert, Mambo Jambo"
 
 ## Setup/Installation Requirements
 
-* _This is a great place_
-* _to list setup instructions_
-* _in a simple_
-* _easy-to-understand_
-* _format_
+* _This setup requires the installation of .NET and MAMP_
+* _.NET runtime_
+* _git clone https://github.com/hamzilitary/Hair-Salon-Code-Review_
+* _Then you can create the database_
+* _Table structure for table `client`
+--
 
-_{Leave nothing to chance! You want it to be easy for potential users, employers and collaborators to run your app. Do I need to run a server? How should I set up my databases? Is there other code this app depends on?}_
+CREATE TABLE `client` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `stylist` int(11) NOT NULL,
+  `type` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-## Known Bugs
+--
+-- Dumping data for table `client`
+--
 
-_{Are there issues that have not yet been resolved that you want to let users know you know?  Outline any issues that would impact use of your application.  Share any workarounds that are in place. }_
+INSERT INTO `client` (`id`, `name`, `stylist`, `type`) VALUES
+(1, 'Rob', 1, NULL),
+(4, 'Bart ', 5, NULL),
+(5, 'Pumpkin', 5, NULL);
 
-## Support and contact details
+--
+* _Table structure for table `stylist`
+--
 
-_{Let people know what to do if they run into any issues or have questions, ideas or concerns.  Encourage them to contact you or make a contribution to the code.}_
+CREATE TABLE `stylist` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+* _Boot the MySql in MAMP_
+* _Open the command and navigate to /Hair-Salon-Code-Review/HairSalon and run dotnet restore
+
+* _Do the same but navigate to /Hair-Salon-Code-Review/HairSalon.Test
+
+* _Run dotnet run in the command
+
+* _Go to localhost:5000/ in your browser
+
+__
+
+
 
 ## Technologies Used
 
-_{Tell me about the languages and tools you used to create this app. Assume that I know you probably used HTML and CSS. If you did something really cool using only HTML, point that out.}_
+* _HTML_
+* _Bootstrap_
+* _C#_
+* _MAMP_
+* _.NET Core 1.1
+* _Razor_
+* _MySql
 
-### License
 
-*{Determine the license under which this application can be used.  See below for more details on licensing.}*
 
-Copyright (c) 2016 **_{List of contributors or company name}_**
+
+
+Copyright (c) 2018 **_{Hamza Naeem}_**
