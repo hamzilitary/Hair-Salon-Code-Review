@@ -29,7 +29,7 @@ namespace HairSalon.Models
      MySqlConnection conn = DB.Connection();
      conn.Open();
      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-     cmd.CommandText = @"SELECT * FROM stylist;";
+     cmd.CommandText = @"SELECT * FROM stylists;";
      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
      while (rdr.Read())
      {
@@ -66,7 +66,7 @@ namespace HairSalon.Models
      conn.Open();
 
      var cmd = conn.CreateCommand() as MySqlCommand;
-     cmd.CommandText = @"INSERT INTO `stylist` (`name`) VALUES (@StylistName);";
+     cmd.CommandText = @"INSERT INTO `stylists` (`name`) VALUES (@StylistName);";
 
      MySqlParameter name = new MySqlParameter();
      name.ParameterName = "@StylistName";
@@ -92,7 +92,7 @@ namespace HairSalon.Models
      MySqlConnection conn = DB.Connection();
      conn.Open();
      var cmd = conn.CreateCommand() as MySqlCommand;
-     cmd.CommandText = @"SELECT * FROM `client` WHERE `stylist` = @stylist_id;";
+     cmd.CommandText = @"SELECT * FROM `clients` WHERE `stylist` = @stylist_id;";
 
      MySqlParameter stylistId = new MySqlParameter();
      stylistId.ParameterName = "@stylist_id";
@@ -124,7 +124,7 @@ namespace HairSalon.Models
      conn.Open();
 
      var cmd = conn.CreateCommand() as MySqlCommand;
-     cmd.CommandText = @"DELETE FROM stylist;";
+     cmd.CommandText = @"DELETE FROM stylists;";
 
      cmd.ExecuteNonQuery();
 
@@ -140,10 +140,10 @@ namespace HairSalon.Models
      MySqlConnection conn = DB.Connection();
      conn.Open();
      var cmd = conn.CreateCommand() as MySqlCommand;
-     cmd.CommandText = @"DELETE FROM stylist WHERE id = @thisId;";
+     cmd.CommandText = @"DELETE FROM stylists WHERE id = @thisId;";
 
      var cmdClients = conn.CreateCommand() as MySqlCommand;
-     cmdClients.CommandText = @"DELETE FROM client WHERE stylist = @thisId;";
+     cmdClients.CommandText = @"DELETE FROM clients WHERE stylist = @thisId;";
 
      MySqlParameter thisId = new MySqlParameter();
      thisId.ParameterName = "@thisId";
@@ -167,7 +167,7 @@ namespace HairSalon.Models
      conn.Open();
 
      var cmd = conn.CreateCommand() as MySqlCommand;
-     cmd.CommandText = @"SELECT * from `stylist` WHERE id = @thisId;";
+     cmd.CommandText = @"SELECT * from `stylists` WHERE id = @thisId;";
 
      MySqlParameter thisId = new MySqlParameter();
      thisId.ParameterName = "@thisId";
@@ -201,7 +201,7 @@ namespace HairSalon.Models
      MySqlConnection conn = DB.Connection();
      conn.Open();
      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-       cmd.CommandText = @"SELECT * FROM `client` WHERE `stylist` = " + this.GetId();
+       cmd.CommandText = @"SELECT * FROM `clients` WHERE `stylist` = " + this.GetId();
      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
      while (rdr.Read())
      {

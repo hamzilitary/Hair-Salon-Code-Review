@@ -45,7 +45,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM client;";
+      cmd.CommandText = @"SELECT * FROM clients;";
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
@@ -69,7 +69,7 @@ namespace HairSalon.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM client;";
+      cmd.CommandText = @"DELETE FROM clients;";
 
       cmd.ExecuteNonQuery();
 
@@ -85,7 +85,7 @@ namespace HairSalon.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO `client`(`name`, `stylist`) VALUES (@ClientDescription, @StylistId);";
+      cmd.CommandText = @"INSERT INTO `clients`(`name`, `stylist`) VALUES (@ClientDescription, @StylistId);";
 
       MySqlParameter description = new MySqlParameter();
       description.ParameterName = "@ClientDescription";
@@ -135,7 +135,7 @@ namespace HairSalon.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM `client` WHERE id = @thisId;";
+      cmd.CommandText = @"SELECT * FROM `clients` WHERE id = @thisId;";
 
       MySqlParameter thisId = new MySqlParameter();
       thisId.ParameterName = "@thisId";
@@ -170,7 +170,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"UPDATE client SET name = @newDescription WHERE id = @searchId;";
+      cmd.CommandText = @"UPDATE clients SET name = @newDescription WHERE id = @searchId;";
 
       MySqlParameter searchId = new MySqlParameter();
       searchId.ParameterName = "@searchId";
@@ -197,7 +197,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM client WHERE id = @thisId;";
+      cmd.CommandText = @"DELETE FROM clients WHERE id = @thisId;";
 
       MySqlParameter thisId = new MySqlParameter();
       thisId.ParameterName = "@thisId";

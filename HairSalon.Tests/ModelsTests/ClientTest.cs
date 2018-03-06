@@ -16,7 +16,7 @@ namespace HairSalon.Tests
 
     public ClientTests()
     {
-      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=hair_salon_test";
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=hamza_naeem_test";
     }
     [TestMethod]
     public void Equals_ReturnsTrueIfDescriptionsAreTheSame_Recipe()
